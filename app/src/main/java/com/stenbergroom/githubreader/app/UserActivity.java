@@ -19,6 +19,7 @@ public class UserActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setContent....
         tv_test = (TextView)findViewById(R.id.tv_test);
 
         try {
