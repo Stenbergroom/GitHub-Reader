@@ -2,7 +2,9 @@
 <resources>
 
     <string name="app_name">Github Reader</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="tv_info_user">Input username to know more:</string>
+    <string name="et_user_field_hint">some GitHub username</string>
+    <string name="btn_tell_me_more">{faw-search}  Tell me more!</string>
 
 </resources>
