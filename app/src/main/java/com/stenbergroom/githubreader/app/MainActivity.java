@@ -5,7 +5,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,11 +17,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        if(toolbar != null){
-            setSupportActionBar(toolbar);
-            getSupportActionBar().setIcon(R.drawable.ic_launcher);
-
-        }
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setIcon(R.drawable.ic_launcher);
     }
 
 
