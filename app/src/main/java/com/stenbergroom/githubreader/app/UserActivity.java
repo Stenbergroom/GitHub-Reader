@@ -20,7 +20,7 @@ public class UserActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        tv_test = (TextView)findViewById(R.id.tv_test);
+        //tv_test = (TextView)findViewById(R.id.tv_test);
 
         try {
             gitHub = GitHub.connectUsingOAuth(System.getProperty("github.oauth"));

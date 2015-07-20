@@ -1,18 +1,14 @@
 package com.stenbergroom.githubreader.app;
 
-import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
-import org.kohsuke.github.*;
-
-import java.io.IOException;
+import android.view.Window;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
 
 
@@ -20,6 +16,13 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        if(toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setIcon(R.drawable.ic_launcher);
+
+        }
     }
 
 
