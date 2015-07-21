@@ -7,16 +7,16 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.nispok.snackbar.Snackbar;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class UserActivity extends ActionBarActivity {
 
-    String account = "Stenbergroom";
-    private GitHub gitHub;
-    private TextView tv_test;
+    private URL avatarUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,10 @@ public class UserActivity extends ActionBarActivity {
 
         if (MainActivity.getGitHub() == null && MainActivity.getUser() == null) {
             Toast.makeText(UserActivity.this, "gh or user null", Toast.LENGTH_SHORT).show();
+        } else {
+            Snackbar.with(UserActivity.this)
+                    .text(MainActivity.getUser().getLogin())
+                    .show(UserActivity.this);
         }
     }
 
@@ -38,6 +42,5 @@ public class UserActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         MainActivity.setUser(null);
-        Toast.makeText(UserActivity.this, "on destroy", Toast.LENGTH_SHORT).show();
     }
 }
