@@ -7,11 +7,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.IconicsTextView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.nispok.snackbar.Snackbar;
+import com.pkmmte.view.CircularImageView;
 import org.kohsuke.github.GHUser;
 import org.kohsuke.github.GitHub;
 
@@ -23,7 +25,8 @@ public class UserActivity extends ActionBarActivity {
 
     private URL avatarUrl;
     private Bitmap bitmap;
-    private ImageView imageAvatar;
+    private CircularImageView imageAvatar;
+    private IconicsTextView tvUsernameCompany, tvFollowersCounts, tvFollowingCounts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,11 @@ public class UserActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
-        imageAvatar = (ImageView)findViewById(R.id.image_avatar);
+        imageAvatar = (CircularImageView)findViewById(R.id.image_avatar);
+        tvUsernameCompany = (IconicsTextView)findViewById(R.id.tv_username_company);
+        tvFollowersCounts = (IconicsTextView)findViewById(R.id.tv_followers_counts);
+        tvFollowingCounts = (IconicsTextView)findViewById(R.id.tv_following_counts);
+
         new InitializeUserInfoTask().execute();
 
         if (MainActivity.getGitHub() == null && MainActivity.getUser() == null) {
@@ -76,11 +83,20 @@ public class UserActivity extends ActionBarActivity {
 
     class InitializeUserInfoTask extends AsyncTask<Void, Void, Void> {
 
+        String tmpUsernameCompany, tmpFollowersCounts, tmpFollowingCounts;
+
         @Override
         protected Void doInBackground(Void... params) {
             try {
                 avatarUrl = new URL(MainActivity.getUser().getAvatarUrl());
                 bitmap = BitmapFactory.decodeStream(avatarUrl.openConnection().getInputStream());
+                if (!(MainActivity.getUser().getCompany() == null) && !MainActivity.getUser().getCompany().equals("")) {
+                    tmpUsernameCompany = MainActivity.getUser().getLogin() + ", " + MainActivity.getUser().getCompany();
+                } else {
+                    tmpUsernameCompany = MainActivity.getUser().getLogin();
+                }
+                tmpFollowersCounts = String.valueOf(MainActivity.getUser().getFollowersCount());
+                tmpFollowingCounts = String.valueOf(MainActivity.getUser().getFollowingCount());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -93,6 +109,9 @@ public class UserActivity extends ActionBarActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             imageAvatar.setImageBitmap(bitmap);
+            tvUsernameCompany.setText(tmpUsernameCompany);
+            tvFollowersCounts.setText(tmpFollowersCounts);
+            tvFollowingCounts.setText(tmpFollowingCounts);
         }
     }
 }
