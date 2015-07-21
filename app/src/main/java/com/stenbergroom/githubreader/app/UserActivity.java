@@ -36,7 +36,6 @@ public class UserActivity extends ActionBarActivity {
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
-
         imageAvatar = (ImageView)findViewById(R.id.image_avatar);
         new InitializeUserInfoTask().execute();
 
