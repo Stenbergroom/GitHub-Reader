@@ -21,6 +21,8 @@ public class UserActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        //gitHub = GitHub.connectUsingOAuth(System.getProperty("github.oauth"));
+        //user = gitHub.getUser(account);
 
 /*        try {
             gitHub = GitHub.connectUsingOAuth(System.getProperty("github.oauth"));

@@ -1,13 +1,12 @@
 package com.stenbergroom.githubreader.app;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
                     try {
                         gitHub = GitHub.connectUsingOAuth(OAUTH_TOKEN);
                         if (gitHub != null) {
-                            checkGitHubUser(etUsername.getText().toString());
+                             new ProcessingUserTask().execute();
                         } else {
                             Snackbar.with(MainActivity.this)
                                     .text(MainActivity.this.getString(R.string.failed_connection_to_gh))
@@ -60,7 +59,7 @@ public class MainActivity extends ActionBarActivity {
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
-                        Toast.makeText(MainActivity.this, "Catch error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Catch error connect", Toast.LENGTH_SHORT).show();
                     }
                 }
                 if (!Network.isAvailable(MainActivity.this)){
@@ -70,10 +69,17 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
-    }
 
-    private void checkGitHubUser(String username) {
-
+        etUsername.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_UP:
+                        usernameField.clearError();
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -89,5 +95,29 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class ProcessingUserTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                user = gitHub.getUser(etUsername.getText().toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (user != null) {
+                //startAct
+                //after all user == null
+            } else {
+                usernameField.setError("User " + etUsername.getText().toString() + " not found");
+            }
+        }
     }
 }
