@@ -11,9 +11,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by Sten on 20.07.2015.
- */
 public class UsernameField extends LinearLayout implements ViewGroup.OnHierarchyChangeListener{
 
         private static final int ERROR_LABEL_TEXT_SIZE = 12;

@@ -6,5 +6,6 @@
     <string name="tv_info_user">Input username to know more:</string>
     <string name="et_user_field_hint">some GitHub username</string>
     <string name="btn_tell_me_more">{faw-search}  Tell me more!</string>
+    <string name="no_connection">No network connection</string>
 
 </resources>
