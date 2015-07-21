@@ -20,9 +20,9 @@ public class UserActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        //tv_test = (TextView)findViewById(R.id.tv_test);
 
-        try {
+
+/*        try {
             gitHub = GitHub.connectUsingOAuth(System.getProperty("github.oauth"));
         } catch (IOException e) {
             Toast.makeText(UserActivity.this, "Error Connect", Toast.LENGTH_SHORT).show();
@@ -49,6 +49,6 @@ public class UserActivity extends Activity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             tv_test.setText(user.getLogin());
-        }
+        }*/
     }
 }

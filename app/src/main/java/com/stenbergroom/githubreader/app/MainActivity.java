@@ -11,13 +11,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import com.nispok.snackbar.Snackbar;
 import com.stenbergroom.githubreader.app.util.Network;
 import com.stenbergroom.githubreader.app.util.UsernameField;
+import org.kohsuke.github.GHUser;
+import org.kohsuke.github.GitHub;
+
+import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    private static final String OAUTH_TOKEN = System.getProperty("github.oauth");
+
+    private GitHub gitHub;
+    private GHUser user;
     private UsernameField usernameField;
     private EditText etUsername;
     private Button btnTellMeMore;
@@ -40,7 +49,19 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View view) {
                 if (Network.isAvailable(MainActivity.this) && !etUsername.getText().toString().equals("")){
-
+                    try {
+                        gitHub = GitHub.connectUsingOAuth(OAUTH_TOKEN);
+                        if (gitHub != null) {
+                            checkGitHubUser(etUsername.getText().toString());
+                        } else {
+                            Snackbar.with(MainActivity.this)
+                                    .text(MainActivity.this.getString(R.string.failed_connection_to_gh))
+                                    .show(MainActivity.this);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Catch error", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 if (!Network.isAvailable(MainActivity.this)){
                     Snackbar.with(MainActivity.this)
@@ -49,6 +70,10 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         });
+    }
+
+    private void checkGitHubUser(String username) {
+
     }
 
     @Override

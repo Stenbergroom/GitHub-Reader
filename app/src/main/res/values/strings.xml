@@ -7,5 +7,6 @@
     <string name="et_user_field_hint">some GitHub username</string>
     <string name="btn_tell_me_more">{faw-search}  Tell me more!</string>
     <string name="no_connection">No network connection</string>
+    <string name="failed_connection_to_gh">Failed connection to GitHub, try again</string>
 
 </resources>
