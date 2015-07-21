@@ -57,7 +57,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_black"
-                android:text="username, company">
+                android:text="">
         </IconicsTextView>
 
         <LinearLayout
@@ -76,7 +76,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
-                    android:text="123">
+                    android:text="">
             </IconicsTextView>
 
             <IconicsTextView
@@ -118,7 +118,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
-                    android:text="456">
+                    android:text="">
             </IconicsTextView>
 
             <IconicsTextView
