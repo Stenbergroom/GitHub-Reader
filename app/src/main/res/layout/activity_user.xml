@@ -36,7 +36,7 @@
                 android:id="@+id/image_avatar"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_centerHorizontal="true"
                 android:background="@android:color/holo_red_light">
         </ImageView>
@@ -81,7 +81,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
-                    android:text="followers">
+                    android:text="@string/tv_followers">
             </IconicsTextView>
 
             <IconicsImageView
@@ -123,7 +123,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
-                    android:text="following">
+                    android:text="@string/tv_following">
             </IconicsTextView>
 
             <IconicsImageView
@@ -147,7 +147,9 @@
                 android:layout_marginTop="10dp"
                 app:iiv_icon="faw-save"
                 app:iiv_color="@color/default_primary_dark"
-                tools:ignore="MissingPrefix">
+                tools:ignore="MissingPrefix"
+                android:clickable="true"
+                android:onClick="onClickImage">
         </IconicsImageView>
 
     </RelativeLayout>

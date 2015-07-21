@@ -11,7 +11,7 @@
             android:state_pressed="true">
     </item>
     <item
-            android:drawable="@color/default_primary_item">
+            android:drawable="@color/primary_buttons">
     </item>
 
 </selector>

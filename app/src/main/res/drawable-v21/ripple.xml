@@ -12,7 +12,7 @@
 
     <item android:state_pressed="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/default_primary_item"/>
+            <solid android:color="@color/primary_buttons"/>
             <corners android:radius="3dp"/>
         </shape>
     </item>

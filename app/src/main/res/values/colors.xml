@@ -3,21 +3,17 @@
     <!--Theme colors-->
     <color name="default_primary">#607D8B</color>
     <color name="default_primary_dark">#455A64</color>
-    <color name="default_primary_item">#90A4AE</color>
     <color name="window_background">#CFD8DC</color>
     <color name="accent">#303F9F</color>
-    <color name="accent_light">#3F51B5</color>
 
     <!--General text color-->
     <color name="text_black">#212121</color>
     <color name="text">#727272</color>
     <color name="hint">#B8B8B8</color>
 
-    <!--General colors for drawer-->
-    <color name="list_background">#F2F2F2</color>
-    <!--Primary colors for drawer-->
-    <color name="list_background_normal">#FCFCFC</color>
-    <!--Secondary colors for drawer-->
-    <color name="list_background_secondary_normal">#F2F2F2</color>
+    <!--Other colors-->
+    <color name="primary_buttons">#90A4AE</color>
+    <color name="background_light">#ECEFF1</color>
+    <color name="accent_light">#3F51B5</color>
 
 </resources>
