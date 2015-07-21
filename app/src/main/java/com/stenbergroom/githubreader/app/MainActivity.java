@@ -1,7 +1,9 @@
 package com.stenbergroom.githubreader.app;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -23,26 +25,38 @@ import java.io.IOException;
 public class MainActivity extends ActionBarActivity {
 
     private static final String OAUTH_TOKEN = System.getProperty("github.oauth");
-
-    private GitHub gitHub;
-    private GHUser user;
+    private static GitHub gitHub;
+    private static GHUser user;
     private UsernameField usernameField;
     private EditText etUsername;
     private Button btnTellMeMore;
+
+    public static GitHub getGitHub() {
+        return gitHub;
+    }
+
+    public static GHUser getUser() {
+        return user;
+    }
+
+    public static void setUser(GHUser user) {
+        MainActivity.user = user;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        usernameField = (UsernameField)findViewById(R.id.username_layout);
-        etUsername = (EditText)findViewById(R.id.et_username);
-        btnTellMeMore = (Button)findViewById(R.id.btn_tell_me_more);
-
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
+
+        usernameField = (UsernameField)findViewById(R.id.username_layout);
+        etUsername = (EditText)findViewById(R.id.et_username);
+        btnTellMeMore = (Button)findViewById(R.id.btn_tell_me_more);
+
 
         btnTellMeMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,8 +127,10 @@ public class MainActivity extends ActionBarActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (user != null) {
-                //startAct
-                //after all user == null
+                Intent intent = new Intent(MainActivity.this, UserActivity.class);
+                intent.putExtra("username", user.getLogin());
+                ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this);
+                startActivity(intent, activityOptionsCompat.toBundle());
             } else {
                 usernameField.setError("User " + etUsername.getText().toString() + " not found");
             }
