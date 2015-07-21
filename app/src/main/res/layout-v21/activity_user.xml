@@ -34,7 +34,123 @@
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
+        <ImageView
+                android:id="@+id/image_avatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/holo_red_light">
+        </ImageView>
 
+        <IconicsTextView
+                android:id="@+id/tv_username_company"
+                android:layout_below="@+id/toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text"
+                android:text="username, company">
+        </IconicsTextView>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toLeftOf="@+id/image_avatar"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp">
+
+            <IconicsTextView
+                    android:id="@+id/tv_followers_counts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_horizontal"
+                    android:text="123">
+            </IconicsTextView>
+
+            <IconicsTextView
+                    android:id="@+id/tv_followers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_horizontal"
+                    android:text="followers">
+            </IconicsTextView>
+
+            <IconicsImageView
+                    android:id="@+id/image_global"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
+                    app:iiv_icon="faw-globe"
+                    app:iiv_color="@color/default_primary_dark"
+                    tools:ignore="MissingPrefix">
+            </IconicsImageView>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/image_avatar"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp">
+
+            <IconicsTextView
+                    android:id="@+id/tv_following_counts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_horizontal"
+                    android:text="456">
+            </IconicsTextView>
+
+            <IconicsTextView
+                    android:id="@+id/tv_following"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_gravity="center_horizontal"
+                    android:text="following">
+            </IconicsTextView>
+
+            <IconicsImageView
+                    android:id="@+id/image_share"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="40dp"
+                    app:iiv_icon="faw-share-alt"
+                    app:iiv_color="@color/default_primary_dark"
+                    tools:ignore="MissingPrefix">
+            </IconicsImageView>
+        </LinearLayout>
+
+        <IconicsImageView
+                android:id="@+id/image_save"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/image_avatar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                app:iiv_icon="faw-save"
+                app:iiv_color="@color/default_primary_dark"
+                tools:ignore="MissingPrefix">
+        </IconicsImageView>
 
     </RelativeLayout>
 
