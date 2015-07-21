@@ -132,7 +132,7 @@ public class MainActivity extends ActionBarActivity {
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this);
                 startActivity(intent, activityOptionsCompat.toBundle());
             } else {
-                usernameField.setError("User " + etUsername.getText().toString() + " not found");
+                usernameField.setError("User "+etUsername.getText().toString()+" not found");
             }
         }
     }
