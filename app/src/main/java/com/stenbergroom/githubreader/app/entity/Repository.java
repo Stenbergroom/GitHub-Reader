@@ -1,6 +1,6 @@
 package com.stenbergroom.githubreader.app.entity;
 
-public class Repository {
+public class Repository implements Comparable{
 
     private String name,language;
     private int forks, watchers;
@@ -26,5 +26,11 @@ public class Repository {
 
     public String getWatchers() {
         return String.valueOf(watchers);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Repository f =(Repository) o;
+        return getName().compareToIgnoreCase(f.getName());
     }
 }

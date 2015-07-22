@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -121,6 +122,7 @@ public class UserActivity extends ActionBarActivity {
                     GHRepository ghRepository = repositories.get(repoName);
                     repositoryList.add(new Repository(ghRepository.getName(), ghRepository.getLanguage(), ghRepository.getForks(), ghRepository.getWatchers()));
                 }
+                Collections.sort(repositoryList);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
