@@ -127,6 +127,7 @@ public class MainActivity extends ActionBarActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             if (user != null) {
+                // del intent?
                 Intent intent = new Intent(MainActivity.this, UserActivity.class);
                 intent.putExtra("username", user.getLogin());
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this);

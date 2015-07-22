@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.IconicsTextView;
@@ -14,10 +15,16 @@ import android.widget.ProgressBar;
 import com.nispok.snackbar.Snackbar;
 import com.pkmmte.view.CircularImageView;
 import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
+import com.stenbergroom.githubreader.app.animator.CustomAnimator;
+import com.stenbergroom.githubreader.app.entity.Repository;
+import org.kohsuke.github.GHRepository;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class UserActivity extends ActionBarActivity {
 
@@ -27,9 +34,10 @@ public class UserActivity extends ActionBarActivity {
     private String usernameCompany, followersCounts, followingCounts;
     private IconicsTextView tvUsernameCompany, tvFollowersCounts, tvFollowingCounts;
     private RecyclerView recyclerView;
-    private RepositoryAdapter repositoryAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
+    private List<Repository> repositoryList = new ArrayList<Repository>();
+    private RepositoryAdapter repositoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +56,10 @@ public class UserActivity extends ActionBarActivity {
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         recyclerView = (RecyclerView)findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setItemAnimator(new CustomAnimator());
+        repositoryAdapter = new RepositoryAdapter(new ArrayList<Repository>(), R.layout.row_repository, UserActivity.this);
+        recyclerView.setAdapter(repositoryAdapter);
 
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.accent));
@@ -103,6 +115,12 @@ public class UserActivity extends ActionBarActivity {
                 }
                 followersCounts = String.valueOf(MainActivity.getUser().getFollowersCount());
                 followingCounts = String.valueOf(MainActivity.getUser().getFollowingCount());
+
+                Map<String, GHRepository> repositories = MainActivity.getUser().getRepositories();
+                for(String repoName : repositories.keySet()) {
+                    GHRepository ghRepository = repositories.get(repoName);
+                    repositoryList.add(new Repository(ghRepository.getName(), ghRepository.getLanguage(), ghRepository.getForks(), ghRepository.getWatchers()));
+                }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -118,6 +136,10 @@ public class UserActivity extends ActionBarActivity {
             tvUsernameCompany.setText(usernameCompany);
             tvFollowersCounts.setText(followersCounts);
             tvFollowingCounts.setText(followingCounts);
+
+            repositoryAdapter.addRepositories(repositoryList);
+
+            progressBar.setVisibility(View.GONE);
         }
     }
 }
