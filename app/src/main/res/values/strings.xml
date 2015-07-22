@@ -11,5 +11,6 @@
     <string name="tv_followers">followers</string>
     <string name="tv_following">following</string>
     <string name="tv_repositories">Repositories</string>
+    <string name="tv_language">Language:</string>
 
 </resources>

@@ -15,5 +15,6 @@
     <color name="primary_buttons">#90A4AE</color>
     <color name="background_light">#ECEFF1</color>
     <color name="accent_light">#3F51B5</color>
+    <color name="cards_background">#F9F9F9</color>
 
 </resources>
