@@ -1,21 +1,21 @@
 package com.stenbergroom.githubreader.app;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.IconicsTextView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.nispok.snackbar.Snackbar;
 import com.pkmmte.view.CircularImageView;
-import org.kohsuke.github.GHUser;
-import org.kohsuke.github.GitHub;
+import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -27,13 +27,16 @@ public class UserActivity extends ActionBarActivity {
     private Bitmap bitmap;
     private CircularImageView imageAvatar;
     private IconicsTextView tvUsernameCompany, tvFollowersCounts, tvFollowingCounts;
+    private RecyclerView recyclerView;
+    private RepositoryAdapter repositoryAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        //gitHub = GitHub.connectUsingOAuth(System.getProperty("github.oauth"));
-        //user = gitHub.getUser(account);
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
@@ -43,16 +46,22 @@ public class UserActivity extends ActionBarActivity {
         tvUsernameCompany = (IconicsTextView)findViewById(R.id.tv_username_company);
         tvFollowersCounts = (IconicsTextView)findViewById(R.id.tv_followers_counts);
         tvFollowingCounts = (IconicsTextView)findViewById(R.id.tv_following_counts);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+
+        recyclerView = (RecyclerView)findViewById(R.id.list);
+
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.accent));
+        swipeRefreshLayout.setRefreshing(true);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //
+            }
+        });
 
         new InitializeUserInfoTask().execute();
 
-        if (MainActivity.getGitHub() == null && MainActivity.getUser() == null) {
-            Toast.makeText(UserActivity.this, "gh or user null", Toast.LENGTH_SHORT).show();
-        } else {
-            Snackbar.with(UserActivity.this)
-                    .text(MainActivity.getUser().getLogin())
-                    .show(UserActivity.this);
-        }
     }
 
     public void onClickImage(View view) {
