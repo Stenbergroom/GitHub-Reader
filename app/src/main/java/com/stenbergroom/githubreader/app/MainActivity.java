@@ -13,18 +13,12 @@ import com.nispok.snackbar.Snackbar;
 import com.stenbergroom.githubreader.app.util.Network;
 import com.stenbergroom.githubreader.app.helper.UserHelper;
 import com.stenbergroom.githubreader.app.util.UsernameField;
-import org.kohsuke.github.GHUser;
-import org.kohsuke.github.GitHub;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final String OAUTH_TOKEN = System.getProperty("github.oauth");
-    private static GitHub gitHub;
-    private static GHUser user;
     private UsernameField usernameField;
     private EditText etUsername;
-    private Button btnTellMeMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +32,17 @@ public class MainActivity extends ActionBarActivity {
 
         usernameField = (UsernameField)findViewById(R.id.username_layout);
         etUsername = (EditText)findViewById(R.id.et_username);
-        btnTellMeMore = (Button)findViewById(R.id.btn_tell_me_more);
+        Button btnTellMeMore = (Button) findViewById(R.id.btn_tell_me_more);
 
 
         btnTellMeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Network.isAvailable(MainActivity.this) && !etUsername.getText().toString().equals("")){
+                if (Network.isAvailable(MainActivity.this) && !etUsername.getText().toString().equals("")) {
                     UserHelper userHelper = new UserHelper(MainActivity.this, etUsername.getText().toString());
                     userHelper.runTask();
                 }
-                if (!Network.isAvailable(MainActivity.this)){
+                if (!Network.isAvailable(MainActivity.this)) {
                     Snackbar.with(MainActivity.this)
                             .text(MainActivity.this.getString(R.string.no_connection))
                             .show(MainActivity.this);
