@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.stenbergroom.githubreader.app.MainActivity;
 import com.stenbergroom.githubreader.app.R;
 import com.stenbergroom.githubreader.app.UserActivity;
 import com.stenbergroom.githubreader.app.entity.Repository;
@@ -27,6 +26,16 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
     public void addRepositories(List<Repository> repoList){
         this.repositories.addAll(repoList);
         this.notifyItemRangeInserted(0, repoList.size() - 1);
+    }
+
+    public void clearRepositories(){
+        int size = this.repositories.size();
+        if(size > 0){
+            for(int i = 0; i < size; i++){
+                repositories.remove(0);
+            }
+            this.notifyItemRangeRemoved(0, size);
+        }
     }
 
     @Override

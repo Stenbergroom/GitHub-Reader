@@ -19,6 +19,7 @@ import com.stenbergroom.githubreader.app.animator.CustomAnimator;
 import com.stenbergroom.githubreader.app.entity.Repository;
 import com.stenbergroom.githubreader.app.entity.User;
 import com.stenbergroom.githubreader.app.helper.UserContentHelper;
+import com.stenbergroom.githubreader.app.helper.UserRepositoryHelper;
 import org.kohsuke.github.GHRepository;
 
 import java.io.IOException;
@@ -31,9 +32,9 @@ import java.util.Map;
 
 public class UserActivity extends ActionBarActivity {
 
-    private ProgressBar progressBar;
-    private List<Repository> repositoryList = new ArrayList<Repository>();
-    private RepositoryAdapter repositoryAdapter;
+    //private ProgressBar progressBar;
+    //private List<Repository> repositoryList = new ArrayList<Repository>();
+    //private RepositoryAdapter repositoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,25 +47,37 @@ public class UserActivity extends ActionBarActivity {
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setItemAnimator(new CustomAnimator());
-        repositoryAdapter = new RepositoryAdapter(new ArrayList<Repository>(), R.layout.row_repository, UserActivity.this);
-        recyclerView.setAdapter(repositoryAdapter);
-
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+            //progressBar = (ProgressBar)findViewById(R.id.progressBar);
+            //recyclerView = (RecyclerView)findViewById(R.id.list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setItemAnimator(new CustomAnimator());
+            RepositoryAdapter repositoryAdapter = new RepositoryAdapter(new ArrayList<Repository>(), R.layout.row_repository, UserActivity.this);
+            recyclerView.setAdapter(repositoryAdapter);
+
+        final UserContentHelper userContentHelper = new UserContentHelper(UserActivity.this);
+        final UserRepositoryHelper userRepositoryHelper = new UserRepositoryHelper(repositoryAdapter, recyclerView, swipeRefreshLayout, progressBar);
+
+
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.accent));
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //
+                //UserRepositoryHelper userRepositoryHelper = new UserRepositoryHelper(UserActivity.this);
+                userRepositoryHelper.runTask();
             }
         });
 
-        UserContentHelper userContentHelper = new UserContentHelper(UserActivity.this);
+        //UserContentHelper userContentHelper = new UserContentHelper(UserActivity.this);
+        //UserRepositoryHelper userRepositoryHelper = new UserRepositoryHelper(UserActivity.this);
+        userRepositoryHelper.runTask();
         userContentHelper.runTask();
         //new InitializeUserInfoTask().execute();
 
+        recyclerView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     public void onClickImage(View view) {
@@ -91,48 +104,5 @@ public class UserActivity extends ActionBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         User.setGhUser(null);
-    }
-
-    class InitializeUserInfoTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-//                URL avatarUrl = new URL(User.getGhUser().getAvatarUrl());
-//                bitmap = BitmapFactory.decodeStream(avatarUrl.openConnection().getInputStream());
-//                if (!(User.getGhUser().getCompany() == null) && !User.getGhUser().getCompany().equals("")) {
-//                    usernameCompany = User.getGhUser().getLogin() + ", " + User.getGhUser().getCompany();
-//                } else {
-//                    usernameCompany = User.getGhUser().getLogin();
-//                }
-//                followingCounts = String.valueOf(User.getGhUser().getFollowingCount());
-//                followersCounts = String.valueOf(User.getGhUser().getFollowersCount());
-
-                Map<String, GHRepository> repositories = User.getGhUser().getRepositories();
-                for(String repoName : repositories.keySet()) {
-                    GHRepository ghRepository = repositories.get(repoName);
-                    repositoryList.add(new Repository(ghRepository.getName(), ghRepository.getLanguage(), ghRepository.getForks(), ghRepository.getWatchers()));
-                }
-                Collections.sort(repositoryList);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-//            imageAvatar.setImageBitmap(bitmap);
-//            tvUsernameCompany.setText(usernameCompany);
-//            tvFollowersCounts.setText(followersCounts);
-//            tvFollowingCounts.setText(followingCounts);
-
-            repositoryAdapter.addRepositories(repositoryList);
-
-            progressBar.setVisibility(View.GONE);
-        }
     }
 }

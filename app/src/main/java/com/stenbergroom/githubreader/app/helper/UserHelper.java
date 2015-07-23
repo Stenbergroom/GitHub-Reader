@@ -3,6 +3,7 @@ package com.stenbergroom.githubreader.app.helper;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.widget.Toast;
 import com.stenbergroom.githubreader.app.MainActivity;
 import com.stenbergroom.githubreader.app.R;
 import com.stenbergroom.githubreader.app.UserActivity;
