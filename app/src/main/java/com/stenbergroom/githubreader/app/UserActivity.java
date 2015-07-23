@@ -18,6 +18,7 @@ import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
 import com.stenbergroom.githubreader.app.animator.CustomAnimator;
 import com.stenbergroom.githubreader.app.entity.Repository;
 import com.stenbergroom.githubreader.app.entity.User;
+import com.stenbergroom.githubreader.app.helper.UserContentHelper;
 import org.kohsuke.github.GHRepository;
 
 import java.io.IOException;
@@ -30,10 +31,6 @@ import java.util.Map;
 
 public class UserActivity extends ActionBarActivity {
 
-    private Bitmap bitmap;
-    private CircularImageView imageAvatar;
-    private String usernameCompany, followersCounts, followingCounts;
-    private IconicsTextView tvUsernameCompany, tvFollowersCounts, tvFollowingCounts;
     private ProgressBar progressBar;
     private List<Repository> repositoryList = new ArrayList<Repository>();
     private RepositoryAdapter repositoryAdapter;
@@ -47,12 +44,6 @@ public class UserActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
-
-        imageAvatar = (CircularImageView)findViewById(R.id.image_avatar);
-        tvUsernameCompany = (IconicsTextView)findViewById(R.id.tv_username_company);
-        tvFollowersCounts = (IconicsTextView)findViewById(R.id.tv_followers_counts);
-        tvFollowingCounts = (IconicsTextView)findViewById(R.id.tv_following_counts);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -70,7 +61,9 @@ public class UserActivity extends ActionBarActivity {
             }
         });
 
-        new InitializeUserInfoTask().execute();
+        UserContentHelper userContentHelper = new UserContentHelper(UserActivity.this);
+        userContentHelper.runTask();
+        //new InitializeUserInfoTask().execute();
 
     }
 
@@ -105,15 +98,15 @@ public class UserActivity extends ActionBarActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                URL avatarUrl = new URL(User.getGhUser().getAvatarUrl());
-                bitmap = BitmapFactory.decodeStream(avatarUrl.openConnection().getInputStream());
-                if (!(User.getGhUser().getCompany() == null) && !User.getGhUser().getCompany().equals("")) {
-                    usernameCompany = User.getGhUser().getLogin() + ", " + User.getGhUser().getCompany();
-                } else {
-                    usernameCompany = User.getGhUser().getLogin();
-                }
-                followingCounts = String.valueOf(User.getGhUser().getFollowingCount());
-                followersCounts = String.valueOf(User.getGhUser().getFollowersCount());
+//                URL avatarUrl = new URL(User.getGhUser().getAvatarUrl());
+//                bitmap = BitmapFactory.decodeStream(avatarUrl.openConnection().getInputStream());
+//                if (!(User.getGhUser().getCompany() == null) && !User.getGhUser().getCompany().equals("")) {
+//                    usernameCompany = User.getGhUser().getLogin() + ", " + User.getGhUser().getCompany();
+//                } else {
+//                    usernameCompany = User.getGhUser().getLogin();
+//                }
+//                followingCounts = String.valueOf(User.getGhUser().getFollowingCount());
+//                followersCounts = String.valueOf(User.getGhUser().getFollowersCount());
 
                 Map<String, GHRepository> repositories = User.getGhUser().getRepositories();
                 for(String repoName : repositories.keySet()) {
@@ -132,10 +125,10 @@ public class UserActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            imageAvatar.setImageBitmap(bitmap);
-            tvUsernameCompany.setText(usernameCompany);
-            tvFollowersCounts.setText(followersCounts);
-            tvFollowingCounts.setText(followingCounts);
+//            imageAvatar.setImageBitmap(bitmap);
+//            tvUsernameCompany.setText(usernameCompany);
+//            tvFollowersCounts.setText(followersCounts);
+//            tvFollowingCounts.setText(followingCounts);
 
             repositoryAdapter.addRepositories(repositoryList);
 

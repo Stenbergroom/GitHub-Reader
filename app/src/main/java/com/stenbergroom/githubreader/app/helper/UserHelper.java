@@ -35,7 +35,6 @@ public class UserHelper {
 
         @Override
         protected Void doInBackground(Void... params) {
-            usernameField = (UsernameField)activity.findViewById(R.id.username_layout);
             try {
                 GitHub gitHub = GitHub.connectUsingOAuth(OAUTH_TOKEN);
                 user = gitHub.getUser(username);
@@ -54,6 +53,7 @@ public class UserHelper {
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity);
                 activity.startActivity(intent, activityOptionsCompat.toBundle());
             } else {
+                usernameField = (UsernameField)activity.findViewById(R.id.username_layout);
                 usernameField.setError("User "+username+" not found");
             }
         }
