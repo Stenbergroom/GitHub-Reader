@@ -32,10 +32,6 @@ import java.util.Map;
 
 public class UserActivity extends ActionBarActivity {
 
-    //private ProgressBar progressBar;
-    //private List<Repository> repositoryList = new ArrayList<Repository>();
-    //private RepositoryAdapter repositoryAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +49,7 @@ public class UserActivity extends ActionBarActivity {
             //recyclerView = (RecyclerView)findViewById(R.id.list);
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setItemAnimator(new CustomAnimator());
-            RepositoryAdapter repositoryAdapter = new RepositoryAdapter(new ArrayList<Repository>(), R.layout.row_repository, UserActivity.this);
+            RepositoryAdapter repositoryAdapter = new RepositoryAdapter(new ArrayList<Repository>(), R.layout.row_repository);
             recyclerView.setAdapter(repositoryAdapter);
 
         final UserContentHelper userContentHelper = new UserContentHelper(UserActivity.this);

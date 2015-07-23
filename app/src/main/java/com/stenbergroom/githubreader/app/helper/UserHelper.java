@@ -19,7 +19,6 @@ public class UserHelper {
     private static final String OAUTH_TOKEN = System.getProperty("github.oauth");
     private GHUser user;
     private MainActivity activity;
-    private UsernameField usernameField;
     private String username;
 
     public UserHelper(MainActivity activity, String username) {
@@ -54,8 +53,8 @@ public class UserHelper {
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity);
                 activity.startActivity(intent, activityOptionsCompat.toBundle());
             } else {
-                usernameField = (UsernameField)activity.findViewById(R.id.username_layout);
-                usernameField.setError("User "+username+" not found");
+                UsernameField usernameField = (UsernameField) activity.findViewById(R.id.username_layout);
+                usernameField.setError("User " + username + " not found");
             }
         }
     }

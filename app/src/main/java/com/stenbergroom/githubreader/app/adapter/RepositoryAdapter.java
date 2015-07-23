@@ -15,12 +15,12 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     private List<Repository> repositories;
     private int rowLayout;
-    private UserActivity mAct;
+    //private UserActivity mAct;
 
-    public RepositoryAdapter(List<Repository> repositories, int rowLayout, UserActivity mAct) {
+    public RepositoryAdapter(List<Repository> repositories, int rowLayout) {
         this.repositories = repositories;
         this.rowLayout = rowLayout;
-        this.mAct = mAct;
+        //this.mAct = mAct;
     }
 
     public void addRepositories(List<Repository> repoList){
