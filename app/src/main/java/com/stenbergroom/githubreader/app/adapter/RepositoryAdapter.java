@@ -48,6 +48,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
     public int getItemCount() {
         return repositories == null ? 0 : repositories.size();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvRepositoryName, tvRepositoryLanguage, tvForkedCount, tvStarredCount;

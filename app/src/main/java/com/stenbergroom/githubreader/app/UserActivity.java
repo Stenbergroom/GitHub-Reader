@@ -17,6 +17,7 @@ import com.pkmmte.view.CircularImageView;
 import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
 import com.stenbergroom.githubreader.app.animator.CustomAnimator;
 import com.stenbergroom.githubreader.app.entity.Repository;
+import com.stenbergroom.githubreader.app.entity.User;
 import org.kohsuke.github.GHRepository;
 
 import java.io.IOException;
@@ -29,13 +30,10 @@ import java.util.Map;
 
 public class UserActivity extends ActionBarActivity {
 
-    private URL avatarUrl;
     private Bitmap bitmap;
     private CircularImageView imageAvatar;
     private String usernameCompany, followersCounts, followingCounts;
     private IconicsTextView tvUsernameCompany, tvFollowersCounts, tvFollowingCounts;
-    private RecyclerView recyclerView;
-    private SwipeRefreshLayout swipeRefreshLayout;
     private ProgressBar progressBar;
     private List<Repository> repositoryList = new ArrayList<Repository>();
     private RepositoryAdapter repositoryAdapter;
@@ -56,13 +54,13 @@ public class UserActivity extends ActionBarActivity {
         tvFollowingCounts = (IconicsTextView)findViewById(R.id.tv_following_counts);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
-        recyclerView = (RecyclerView)findViewById(R.id.list);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setItemAnimator(new CustomAnimator());
         repositoryAdapter = new RepositoryAdapter(new ArrayList<Repository>(), R.layout.row_repository, UserActivity.this);
         recyclerView.setAdapter(repositoryAdapter);
 
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+        SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.accent));
         swipeRefreshLayout.setRefreshing(true);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -99,7 +97,7 @@ public class UserActivity extends ActionBarActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        MainActivity.setUser(null);
+        User.setGhUser(null);
     }
 
     class InitializeUserInfoTask extends AsyncTask<Void, Void, Void> {
@@ -107,17 +105,17 @@ public class UserActivity extends ActionBarActivity {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                avatarUrl = new URL(MainActivity.getUser().getAvatarUrl());
+                URL avatarUrl = new URL(User.getGhUser().getAvatarUrl());
                 bitmap = BitmapFactory.decodeStream(avatarUrl.openConnection().getInputStream());
-                if (!(MainActivity.getUser().getCompany() == null) && !MainActivity.getUser().getCompany().equals("")) {
-                    usernameCompany = MainActivity.getUser().getLogin() + ", " + MainActivity.getUser().getCompany();
+                if (!(User.getGhUser().getCompany() == null) && !User.getGhUser().getCompany().equals("")) {
+                    usernameCompany = User.getGhUser().getLogin() + ", " + User.getGhUser().getCompany();
                 } else {
-                    usernameCompany = MainActivity.getUser().getLogin();
+                    usernameCompany = User.getGhUser().getLogin();
                 }
-                followersCounts = String.valueOf(MainActivity.getUser().getFollowersCount());
-                followingCounts = String.valueOf(MainActivity.getUser().getFollowingCount());
+                followingCounts = String.valueOf(User.getGhUser().getFollowingCount());
+                followersCounts = String.valueOf(User.getGhUser().getFollowersCount());
 
-                Map<String, GHRepository> repositories = MainActivity.getUser().getRepositories();
+                Map<String, GHRepository> repositories = User.getGhUser().getRepositories();
                 for(String repoName : repositories.keySet()) {
                     GHRepository ghRepository = repositories.get(repoName);
                     repositoryList.add(new Repository(ghRepository.getName(), ghRepository.getLanguage(), ghRepository.getForks(), ghRepository.getWatchers()));
