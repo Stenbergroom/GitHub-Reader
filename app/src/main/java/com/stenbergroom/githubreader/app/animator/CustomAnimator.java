@@ -17,7 +17,7 @@ public class CustomAnimator extends RecyclerView.ItemAnimator {
 
     @Override
     public void runPendingAnimations() {
-        int animationDuration = 300; // was 300
+        int animationDuration = 300;
         if(!mPendingAdd.isEmpty()){
             for(final RecyclerView.ViewHolder viewHolder : mPendingAdd){
                 View target = viewHolder.itemView;
@@ -34,7 +34,7 @@ public class CustomAnimator extends RecyclerView.ItemAnimator {
                 animator.setTarget(target);
                 animator.setDuration(animationDuration);
                 animator.setInterpolator(new AccelerateDecelerateInterpolator());
-                animator.setStartDelay((animationDuration * viewHolder.getPosition()) / 10); // was 10
+                animator.setStartDelay((animationDuration * viewHolder.getPosition()) / 10);
                 animator.addListener(new Animator.AnimatorListener() {
                     @Override
                     public void onAnimationStart(Animator animation) {

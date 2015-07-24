@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.stenbergroom.githubreader.app.R;
-import com.stenbergroom.githubreader.app.UserActivity;
 import com.stenbergroom.githubreader.app.entity.Repository;
 
 import java.util.List;
@@ -15,12 +14,10 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
 
     private List<Repository> repositories;
     private int rowLayout;
-    //private UserActivity mAct;
 
     public RepositoryAdapter(List<Repository> repositories, int rowLayout) {
         this.repositories = repositories;
         this.rowLayout = rowLayout;
-        //this.mAct = mAct;
     }
 
     public void addRepositories(List<Repository> repoList){
