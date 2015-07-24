@@ -9,10 +9,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import com.nispok.snackbar.Snackbar;
-import com.stenbergroom.githubreader.app.util.Network;
 import com.stenbergroom.githubreader.app.helper.UserHelper;
+import com.stenbergroom.githubreader.app.util.Network;
 import com.stenbergroom.githubreader.app.util.UsernameField;
 
 
