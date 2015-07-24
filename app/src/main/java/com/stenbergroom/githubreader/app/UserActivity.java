@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import com.nispok.snackbar.Snackbar;
 import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
@@ -97,7 +98,7 @@ public class UserActivity extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         Database database = new Database(UserActivity.this);
                         try {
-                            database.pushUserInfo();
+                            database.pushInfo();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
