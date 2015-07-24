@@ -31,7 +31,7 @@ public class UserActivity extends ActionBarActivity {
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        ProgressBar progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        ProgressBar progressBar = (ProgressBar)findViewById(R.id.progress_bar);
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

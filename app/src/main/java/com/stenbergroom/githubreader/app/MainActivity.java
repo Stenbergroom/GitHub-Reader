@@ -9,16 +9,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import com.nispok.snackbar.Snackbar;
 import com.stenbergroom.githubreader.app.helper.UserHelper;
 import com.stenbergroom.githubreader.app.util.Network;
 import com.stenbergroom.githubreader.app.util.UsernameField;
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private UsernameField usernameField;
     private EditText etUsername;
+    private SmoothProgressBar progressBarMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,20 +35,24 @@ public class MainActivity extends ActionBarActivity {
 
         usernameField = (UsernameField)findViewById(R.id.username_layout);
         etUsername = (EditText)findViewById(R.id.et_username);
+        progressBarMain = (SmoothProgressBar)findViewById(R.id.progress_bar_main);
+
+        progressBarMain.setVisibility(View.INVISIBLE);
+
         Button btnTellMeMore = (Button) findViewById(R.id.btn_tell_me_more);
-
-
         btnTellMeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Network.isAvailable(MainActivity.this) && !etUsername.getText().toString().equals("")) {
                     UserHelper userHelper = new UserHelper(MainActivity.this, etUsername.getText().toString());
                     userHelper.runTask();
+                    progressBarMain.setVisibility(View.VISIBLE);
                 }
                 if (!Network.isAvailable(MainActivity.this)) {
                     Snackbar.with(MainActivity.this)
                             .text(MainActivity.this.getString(R.string.no_connection))
                             .show(MainActivity.this);
+                    progressBarMain.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -56,6 +63,7 @@ public class MainActivity extends ActionBarActivity {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_UP:
                         usernameField.clearError();
+                        progressBarMain.setVisibility(View.INVISIBLE);
                 }
                 return false;
             }
@@ -73,7 +81,12 @@ public class MainActivity extends ActionBarActivity {
         if (item.getItemId() == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        progressBarMain.setVisibility(View.INVISIBLE);
     }
 }

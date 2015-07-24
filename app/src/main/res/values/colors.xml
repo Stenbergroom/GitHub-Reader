@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Arrays of colors-->
+    <integer-array name="colors_progress_bar">
+        <item>@color/accent</item>
+        <item>@color/default_primary</item>
+    </integer-array>
+
     <!--Theme colors-->
     <color name="default_primary">#607D8B</color>
     <color name="default_primary_dark">#455A64</color>
