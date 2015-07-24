@@ -37,7 +37,8 @@ public class UserHelper {
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                GitHub gitHub = GitHub.connectUsingOAuth(OAUTH_TOKEN);
+                //GitHub gitHub = GitHub.connectUsingOAuth(OAUTH_TOKEN);
+                GitHub gitHub = GitHub.connectAnonymously();
                 user = gitHub.getUser(username);
             } catch (IOException e) {
                 e.printStackTrace();

@@ -64,7 +64,7 @@ public class RepositoryAdapter extends RecyclerView.Adapter<RepositoryAdapter.Vi
             tvRepositoryName = (TextView)itemView.findViewById(R.id.tv_repository_name);
             tvRepositoryLanguage = (TextView)itemView.findViewById(R.id.tv_repository_language);
             tvForkedCount = (TextView)itemView.findViewById(R.id.tv_forked_count);
-            tvStarredCount = (TextView)itemView.findViewById(R.id.tv_starred_count);
+            tvStarredCount = (TextView)itemView.findViewById(R.id.tv_watches_count);
         }
     }
 }

@@ -73,13 +73,13 @@
                 android:src="@drawable/ic_launcher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tv_starred_count"
+                android:layout_toLeftOf="@+id/tv_watches_count"
                 android:paddingRight="5dp"
                 android:layout_centerVertical="true">
         </ImageView>
 
         <TextView
-                android:id="@+id/tv_starred_count"
+                android:id="@+id/tv_watches_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/image_star"

@@ -12,5 +12,7 @@
     <string name="tv_following">following</string>
     <string name="tv_repositories">Repositories</string>
     <string name="tv_language">Language:</string>
+    <string name="dialog_save_title">Saving</string>
+    <string name="dialog_save_message">Do you really want save info about user to database?</string>
 
 </resources>
