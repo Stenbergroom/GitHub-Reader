@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
 import com.stenbergroom.githubreader.app.entity.Repository;
 import com.stenbergroom.githubreader.app.entity.User;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 import org.kohsuke.github.GHRepository;
 
 import java.io.IOException;
@@ -22,9 +23,9 @@ public class UserRepositoryHelper {
     private RepositoryAdapter repositoryAdapter;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ProgressBar progressBar;
+    private CircularProgressBar progressBar;
 
-    public UserRepositoryHelper(RepositoryAdapter repositoryAdapter, RecyclerView recyclerView, SwipeRefreshLayout swipeRefreshLayout, ProgressBar progressBar) {
+    public UserRepositoryHelper(RepositoryAdapter repositoryAdapter, RecyclerView recyclerView, SwipeRefreshLayout swipeRefreshLayout, CircularProgressBar progressBar) {
         this.repositoryAdapter = repositoryAdapter;
         this.recyclerView = recyclerView;
         this.swipeRefreshLayout = swipeRefreshLayout;

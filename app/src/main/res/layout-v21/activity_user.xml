@@ -195,14 +195,28 @@
 
             </android.support.v4.widget.SwipeRefreshLayout>
 
-            <ProgressBar
+<!--            <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     style="?android:attr/progressBarStyleLarge"
                     android:padding="72dp">
-            </ProgressBar>
+            </ProgressBar>-->
+
+            <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                    android:id="@+id/progress_bar_user"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:indeterminate="true"
+                    android:layout_gravity="center"
+                    app:cpb_color="@color/accent"
+                    app:cpb_rotation_speed="1.5"
+                    app:cpb_sweep_speed="1.5"
+                    app:cpb_stroke_width="8dp"
+                    app:cpb_min_sweep_angle="10"
+                    app:cpb_max_sweep_angle="300">
+            </fr.castorflex.android.circularprogressbar.CircularProgressBar>
         </FrameLayout>
 
 </LinearLayout>

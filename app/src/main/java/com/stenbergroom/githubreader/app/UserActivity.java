@@ -15,6 +15,8 @@ import com.stenbergroom.githubreader.app.entity.Repository;
 import com.stenbergroom.githubreader.app.entity.User;
 import com.stenbergroom.githubreader.app.helper.UserContentHelper;
 import com.stenbergroom.githubreader.app.helper.UserRepositoryHelper;
+import fr.castorflex.android.circularprogressbar.CircularProgressBar;
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 import java.util.ArrayList;
 
@@ -31,7 +33,7 @@ public class UserActivity extends ActionBarActivity {
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
-        ProgressBar progressBar = (ProgressBar)findViewById(R.id.progress_bar);
+        CircularProgressBar progressBar = (CircularProgressBar)findViewById(R.id.progress_bar_user);
         SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
