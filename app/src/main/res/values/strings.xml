@@ -13,7 +13,7 @@
     <string name="tv_repositories">Repositories</string>
     <string name="tv_language">Language:</string>
     <string name="dialog_save_title">Saving</string>
-    <string name="dialog_save_message">Do you really want save info about user and repositories to database?</string>
+    <string name="dialog_save_message">Save info to database?</string>
     <string name="data_saved_success">Data successfully saved</string>
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_cancel">CANCEL</string>

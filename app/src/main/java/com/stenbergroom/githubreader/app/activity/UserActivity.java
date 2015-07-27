@@ -1,16 +1,13 @@
 package com.stenbergroom.githubreader.app.activity;
 
-import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
@@ -19,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import com.cocosw.bottomsheet.BottomSheet;
-import com.nispok.snackbar.Snackbar;
 import com.stenbergroom.githubreader.app.R;
 import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
 import com.stenbergroom.githubreader.app.animator.CustomAnimator;
@@ -77,9 +73,8 @@ public class UserActivity extends ActionBarActivity {
     public void onClickImage(View view) {
         switch (view.getId()) {
             case R.id.image_global:
-                Snackbar.with(UserActivity.this)
-                        .text("Global")
-                        .show(UserActivity.this);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/"+User.getGhUser().getLogin()));
+                startActivity(browserIntent);
                 break;
             case R.id.image_save:
                 showDialogSave();
@@ -100,8 +95,6 @@ public class UserActivity extends ActionBarActivity {
         super.onDestroy();
         User.setGhUser(null);
     }
-
-
 
     private void showDialogSave() {
         AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this)
