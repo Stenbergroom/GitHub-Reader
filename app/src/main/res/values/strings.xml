@@ -17,5 +17,7 @@
     <string name="data_saved_success">Data successfully saved</string>
     <string name="dialog_button_ok">OK</string>
     <string name="dialog_button_cancel">CANCEL</string>
+    <string name="user">User</string>
+    <string name="not_found">not found</string>
 
 </resources>

@@ -57,7 +57,7 @@ public class UserHelper {
             } else {
                 SmoothProgressBar progressBarMain = (SmoothProgressBar)activity.findViewById(R.id.progress_bar_main);
                 UsernameField usernameField = (UsernameField) activity.findViewById(R.id.username_layout);
-                usernameField.setError("User " + username + " not found");
+                usernameField.setError(activity.getString(R.string.user)+" "+username+" "+activity.getString(R.string.not_found));
                 progressBarMain.setVisibility(View.INVISIBLE);
             }
         }
