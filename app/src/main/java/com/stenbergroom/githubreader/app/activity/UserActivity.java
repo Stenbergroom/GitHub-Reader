@@ -85,8 +85,6 @@ public class UserActivity extends ActionBarActivity {
                         .title("Share GitHub profile "), "https://github.com/"+User.getGhUser().getLogin())
                         .show();
                 break;
-            default:
-                break;
         }
     }
 

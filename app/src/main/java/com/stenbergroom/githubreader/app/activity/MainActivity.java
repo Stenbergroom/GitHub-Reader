@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity {
     private EditText etUsername;
     private SmoothProgressBar progressBarMain;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +79,22 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            case R.id.action_english:
+                Snackbar.with(MainActivity.this)
+                        .text("eng")
+                        .show(MainActivity.this);
+                break;
+            case R.id.action_russian:
+                Snackbar.with(MainActivity.this)
+                        .text("rus")
+                        .show(MainActivity.this);
+                break;
+            case R.id.action_about:
+                Snackbar.with(MainActivity.this)
+                        .text("about")
+                        .show(MainActivity.this);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
