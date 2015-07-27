@@ -1,7 +1,16 @@
-package com.stenbergroom.githubreader.app;
+package com.stenbergroom.githubreader.app.activity;
 
+import android.app.Dialog;
+import android.app.FragmentTransaction;
+import android.content.ComponentName;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
@@ -9,7 +18,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import com.cocosw.bottomsheet.BottomSheet;
 import com.nispok.snackbar.Snackbar;
+import com.stenbergroom.githubreader.app.R;
 import com.stenbergroom.githubreader.app.adapter.RepositoryAdapter;
 import com.stenbergroom.githubreader.app.animator.CustomAnimator;
 import com.stenbergroom.githubreader.app.database.Database;
@@ -21,6 +32,7 @@ import fr.castorflex.android.circularprogressbar.CircularProgressBar;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserActivity extends ActionBarActivity {
 
@@ -68,15 +80,18 @@ public class UserActivity extends ActionBarActivity {
                 Snackbar.with(UserActivity.this)
                         .text("Global")
                         .show(UserActivity.this);
-            break;
+                break;
             case R.id.image_save:
                 showDialogSave();
                 break;
             case R.id.image_share:
-            Snackbar.with(UserActivity.this)
-                        .text("Share")
-                        .show(UserActivity.this);
-            break;
+                BottomSheet sheet = getShareActions(new BottomSheet.Builder(UserActivity.this)
+                        .grid()
+                        .title("Share GitHub profile "), "https://github.com/"+User.getGhUser().getLogin())
+                        .show();
+                break;
+            default:
+                break;
         }
     }
 
@@ -86,13 +101,15 @@ public class UserActivity extends ActionBarActivity {
         User.setGhUser(null);
     }
 
+
+
     private void showDialogSave() {
         AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this)
                 .setIcon(R.drawable.ic_launcher)
                 .setTitle(R.string.dialog_save_title)
                 .setMessage(R.string.dialog_save_message)
                 .setCancelable(false)
-                .setPositiveButton(R.id.dialog_save_btn_ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.dialog_button_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Database database = new Database(UserActivity.this);
@@ -103,12 +120,40 @@ public class UserActivity extends ActionBarActivity {
                         }
                     }
                 })
-                .setNegativeButton(R.id.dialog_save_btn_cancel, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.dialog_button_cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    private BottomSheet.Builder getShareActions(BottomSheet.Builder builder, String text) {
+        PackageManager pm = this.getPackageManager();
+
+        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text);
+        final List<ResolveInfo> list = pm.queryIntentActivities(shareIntent, 0);
+
+        for (int i = 0; i < list.size(); i++) {
+            builder.sheet(i, list.get(i).loadIcon(pm), list.get(i).loadLabel(pm));
+        }
+
+        builder.listener(new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ActivityInfo activity = list.get(which).activityInfo;
+                ComponentName name = new ComponentName(activity.applicationInfo.packageName,
+                        activity.name);
+                Intent newIntent = (Intent) shareIntent.clone();
+                newIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                        Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                newIntent.setComponent(name);
+                startActivity(newIntent);
+            }
+        });
+        return builder;
     }
 }

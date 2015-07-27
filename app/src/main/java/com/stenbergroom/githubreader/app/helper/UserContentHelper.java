@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.view.IconicsTextView;
 import com.pkmmte.view.CircularImageView;
 import com.stenbergroom.githubreader.app.R;
-import com.stenbergroom.githubreader.app.UserActivity;
+import com.stenbergroom.githubreader.app.activity.UserActivity;
 import com.stenbergroom.githubreader.app.entity.User;
 
 import java.io.IOException;

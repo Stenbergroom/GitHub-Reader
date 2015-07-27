@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="dialog_save_btn_ok" type="id">OK</item>
-    <item name="dialog_save_btn_cancel" type="id">CANCEL</item>
-</resources>
