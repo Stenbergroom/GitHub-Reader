@@ -1,6 +1,9 @@
 package com.stenbergroom.githubreader.app.activity;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,12 +19,16 @@ import com.stenbergroom.githubreader.app.util.Network;
 import com.stenbergroom.githubreader.app.util.UsernameField;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
+import java.util.Locale;
+
 
 public class MainActivity extends ActionBarActivity {
 
+    private final String CONST_LANG = "language";
     private UsernameField usernameField;
     private EditText etUsername;
     private SmoothProgressBar progressBarMain;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -33,6 +40,8 @@ public class MainActivity extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setIcon(R.drawable.ic_launcher);
+
+        initLang();
 
         usernameField = (UsernameField)findViewById(R.id.username_layout);
         etUsername = (EditText)findViewById(R.id.et_username);
@@ -71,6 +80,29 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+    private void initLang() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String languageToLoad = sharedPreferences.getString(CONST_LANG, "");
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+    }
+
+    private void saveLocale(String key, String value) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        progressBarMain.setVisibility(View.INVISIBLE);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -81,27 +113,21 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_english:
+                saveLocale(CONST_LANG, "eng");
                 Snackbar.with(MainActivity.this)
-                        .text("eng")
+                        .text(MainActivity.this.getString(R.string.restart_app))
                         .show(MainActivity.this);
                 break;
             case R.id.action_russian:
+                saveLocale(CONST_LANG, "ru");
                 Snackbar.with(MainActivity.this)
-                        .text("rus")
+                        .text(MainActivity.this.getString(R.string.restart_app))
                         .show(MainActivity.this);
                 break;
             case R.id.action_about:
-                Snackbar.with(MainActivity.this)
-                        .text("about")
-                        .show(MainActivity.this);
+                // TODO about
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        progressBarMain.setVisibility(View.INVISIBLE);
     }
 }

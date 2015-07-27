@@ -21,5 +21,6 @@
     <string name="action_english">English</string>
     <string name="action_russian">Русский</string>
     <string name="action_about">About</string>
+    <string name="restart_app">Please restart the application</string>
 
 </resources>
