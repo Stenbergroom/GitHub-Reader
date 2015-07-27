@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/container"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -30,16 +31,20 @@
     <RelativeLayout
             android:id="@+id/user_container"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="220dp"
+            android:background="@color/background_light">
 
-        <ImageView
+        <com.pkmmte.view.CircularImageView
                 android:id="@+id/image_avatar"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="40dp"
                 android:layout_centerHorizontal="true"
-                android:background="@android:color/holo_red_light">
-        </ImageView>
+                app:border="true"
+                app:border_color="@color/default_primary_dark"
+                app:border_width="2dp"
+                app:shadow="true">
+        </com.pkmmte.view.CircularImageView>
 
         <IconicsTextView
                 android:id="@+id/tv_username_company"
@@ -47,11 +52,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="5dp"
-                android:textSize="16sp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/text"
-                android:text="username, company">
+                android:textColor="@color/text_black"
+                android:text="">
         </IconicsTextView>
 
         <LinearLayout
@@ -60,17 +65,17 @@
                 android:orientation="vertical"
                 android:layout_toLeftOf="@+id/image_avatar"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="40dp">
+                android:layout_marginTop="50dp">
 
             <IconicsTextView
                     android:id="@+id/tv_followers_counts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
-                    android:text="123">
+                    android:text="">
             </IconicsTextView>
 
             <IconicsTextView
@@ -78,7 +83,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tv_followers">
@@ -92,7 +96,8 @@
                     android:layout_marginTop="40dp"
                     app:iiv_icon="faw-globe"
                     app:iiv_color="@color/default_primary_dark"
-                    tools:ignore="MissingPrefix">
+                    tools:ignore="MissingPrefix"
+                    android:onClick="onClickImage">
             </IconicsImageView>
         </LinearLayout>
 
@@ -102,17 +107,17 @@
                 android:orientation="vertical"
                 android:layout_toRightOf="@+id/image_avatar"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp">
+                android:layout_marginTop="50dp">
 
             <IconicsTextView
                     android:id="@+id/tv_following_counts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
-                    android:text="456">
+                    android:text="">
             </IconicsTextView>
 
             <IconicsTextView
@@ -120,7 +125,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:textStyle="bold"
                     android:textColor="@color/text"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/tv_following">
@@ -134,7 +138,8 @@
                     android:layout_marginTop="40dp"
                     app:iiv_icon="faw-share-alt"
                     app:iiv_color="@color/default_primary_dark"
-                    tools:ignore="MissingPrefix">
+                    tools:ignore="MissingPrefix"
+                    android:onClick="onClickImage">
             </IconicsImageView>
         </LinearLayout>
 
@@ -148,18 +153,60 @@
                 app:iiv_icon="faw-save"
                 app:iiv_color="@color/default_primary_dark"
                 tools:ignore="MissingPrefix"
-                android:clickable="true"
                 android:onClick="onClickImage">
         </IconicsImageView>
 
+        <IconicsTextView
+                android:id="@+id/tv_repositories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/tv_repositories"
+                android:textSize="14sp"
+                android:textColor="@color/text">
+        </IconicsTextView>
+
     </RelativeLayout>
+
 
     <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/default_primary"/>
 
-    <RelativeLayout
-            android:id="@+id/repo_container"
+    <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-    </RelativeLayout>
+            android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+
+                android:id="@+id/swipe_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/list"
+                    android:clipToPadding="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="5dp">
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+                android:id="@+id/progress_bar_user"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:indeterminate="true"
+                android:layout_gravity="center"
+                app:cpb_color="@color/accent"
+                app:cpb_rotation_speed="1.5"
+                app:cpb_sweep_speed="1.5"
+                app:cpb_stroke_width="8dp"
+                app:cpb_min_sweep_angle="10"
+                app:cpb_max_sweep_angle="300">
+        </fr.castorflex.android.circularprogressbar.CircularProgressBar>
+    </FrameLayout>
 
 </LinearLayout>
