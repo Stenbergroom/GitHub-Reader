@@ -69,8 +69,6 @@
                 app:spb_reversed="false"
                 app:spb_mirror_mode="false"
                 app:spb_progressiveStart_activated="false">
-            <!--            app:spb_progressiveStart_speed="4.0"
-                            app:spb_progressiveStop_speed="4.0"-->
         </fr.castorflex.android.smoothprogressbar.SmoothProgressBar>
     </com.stenbergroom.githubreader.app.util.UsernameField>
 

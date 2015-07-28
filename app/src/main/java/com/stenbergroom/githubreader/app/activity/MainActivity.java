@@ -21,7 +21,6 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
 import java.util.Locale;
 
-
 public class MainActivity extends ActionBarActivity {
 
     private static final String CONST_LANG = "language";
@@ -48,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
-        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        getSupportActionBar().setIcon(R.drawable.icon_main);
 
         usernameField = (UsernameField)findViewById(R.id.username_layout);
         etUsername = (EditText)findViewById(R.id.et_username);

@@ -70,11 +70,12 @@
 
         <ImageView
                 android:id="@+id/image_fork"
-                android:src="@drawable/ic_launcher"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:src="@drawable/icon_fork"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/tv_watches_count"
-                android:paddingRight="5dp"
                 android:layout_centerVertical="true">
         </ImageView>
 
@@ -91,12 +92,13 @@
 
         <ImageView
                 android:id="@+id/image_star"
-                android:src="@drawable/ic_launcher"
+                android:src="@drawable/icon_star"
                 android:layout_alignParentRight="true"
-                android:paddingRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
                 android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_width="30dp"
+                android:layout_height="30dp">
         </ImageView>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -42,7 +42,7 @@ public class UserActivity extends ActionBarActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
-        getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        getSupportActionBar().setIcon(R.drawable.icon_main);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
         CircularProgressBar progressBar = (CircularProgressBar)findViewById(R.id.progress_bar_user);
