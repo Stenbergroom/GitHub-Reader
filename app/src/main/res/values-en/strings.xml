@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Reader</string>
+    <string name="action_about">About</string>
+    <string name="action_english">English</string>
+    <string name="action_russian">Русский</string>
+    <string name="btn_tell_me_more">{faw-search} Tell me more!</string>
+    <string name="data_saved_success">Data successfully saved</string>
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_button_ok">OK</string>
+    <string name="dialog_save_message">Save info about user to database?</string>
+    <string name="dialog_save_title">Saving data</string>
+    <string name="et_user_field_hint">some GitHub username</string>
+    <string name="failed_connection_to_gh">Failed connection to GitHub, try again</string>
+    <string name="no_connection">No network connection</string>
+    <string name="not_found">not found</string>
+    <string name="restart_app">Changes will be apply after restart the application</string>
+    <string name="tv_followers">followers</string>
+    <string name="tv_following">following</string>
+    <string name="tv_info_user">Input username to know more:</string>
+    <string name="tv_language">Language:</string>
+    <string name="tv_repositories">Repositories</string>
+    <string name="user">User</string>
+    <string name="share_title">"Share GitHub profile"</string>
+</resources>

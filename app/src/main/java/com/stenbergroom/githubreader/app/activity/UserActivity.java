@@ -32,6 +32,8 @@ import java.util.List;
 
 public class UserActivity extends ActionBarActivity {
 
+    private static final String GH_LINK = "https://github.com/";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class UserActivity extends ActionBarActivity {
     public void onClickImage(View view) {
         switch (view.getId()) {
             case R.id.image_global:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/"+User.getGhUser().getLogin()));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(GH_LINK + User.getGhUser().getLogin()));
                 startActivity(browserIntent);
                 break;
             case R.id.image_save:
@@ -82,7 +84,7 @@ public class UserActivity extends ActionBarActivity {
             case R.id.image_share:
                 BottomSheet sheet = getShareActions(new BottomSheet.Builder(UserActivity.this)
                         .grid()
-                        .title("Share GitHub profile "), "https://github.com/"+User.getGhUser().getLogin())
+                        .title(getString(R.string.share_title)), GH_LINK + User.getGhUser().getLogin())
                         .show();
                 break;
         }
@@ -96,7 +98,6 @@ public class UserActivity extends ActionBarActivity {
 
     private void showDialogSave() {
         AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this)
-                .setIcon(R.drawable.ic_launcher)
                 .setTitle(R.string.dialog_save_title)
                 .setMessage(R.string.dialog_save_message)
                 .setCancelable(false)

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Reader</string>
+    <string name="action_about">О продукте</string>
+    <string name="action_russian">Русский</string>
+    <string name="action_english">English</string>
+    <string name="btn_tell_me_more">{faw-search} Узнать больше!</string>
+    <string name="data_saved_success">Данные успешно сохранены</string>
+    <string name="dialog_button_cancel">Отмена</string>
+    <string name="dialog_button_ok">ОК</string>
+    <string name="dialog_save_message">Сохранить информацию о пользователе в базу данных?</string>
+    <string name="dialog_save_title">Сохранение данных</string>
+    <string name="et_user_field_hint">GitHub пользователь</string>
+    <string name="failed_connection_to_gh">Ошибка подключения к GitHub, попробуйте снова</string>
+    <string name="no_connection">Проверьте соединение с интернетом</string>
+    <string name="not_found">не найден</string>
+    <string name="restart_app">Изменения вступят в силу после перезапуска приложения</string>
+    <string name="tv_followers">Подписчики</string>
+    <string name="tv_following">Подписки</string>
+    <string name="tv_info_user">Введите имя пользователя:</string>
+    <string name="tv_language">Язык:</string>
+    <string name="tv_repositories">Репозитории</string>
+    <string name="user">Пользователь</string>
+    <string name="share_title">"Поделиться ссылкой на GitHub профиль"</string>
+</resources>
